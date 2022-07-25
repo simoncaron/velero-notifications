@@ -16,7 +16,7 @@ spec:
       serviceAccountName: velero
       containers:
         - name: velero-notifications
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: VELERO_NAMESPACE

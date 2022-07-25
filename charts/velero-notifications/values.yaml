@@ -1,6 +1,6 @@
 image:
-  repository: vitobotta/velero-notifications
-  tag: v1654456872
+  repository: ghcr.io/simoncaron/velero-notifications
+  tag: ""  # will default to the appVersion in Chart.yaml
 
 slack:
   enabled: false
