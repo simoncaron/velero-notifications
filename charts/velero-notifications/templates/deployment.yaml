@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: velero-backup-notification
+  name: velero-notifications
   namespace: velero
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: velero-backup-notification
+      app: velero-notifications
   template:
     metadata:
       labels:
-        app: velero-backup-notification
+        app: velero-notifications
     spec:
       serviceAccountName: velero
       containers:
-        - name: velero-backup-notification
+        - name: velero-notifications
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: IfNotPresent
           env:
@@ -33,12 +33,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: slack_webhook
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: SLACK_CHANNEL
               valueFrom:
                 secretKeyRef:
                   key: slack_channel
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: ENABLE_EMAIL_NOTIFICATIONS
               value: {{ .Values.email.enabled | quote }}
             - name: EMAIL_FAILURES_ONLY
@@ -51,22 +51,22 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: email_smtp_host
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: EMAIL_SMTP_PORT
               valueFrom:
                 secretKeyRef:
                   key: email_smtp_port
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: EMAIL_SMTP_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: email_smtp_username
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: EMAIL_SMTP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: email_smtp_password
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
             - name: ENABLE_WEBHOOK_NOTIFICATIONS
               value: {{ .Values.webhook.enabled | quote }}
             - name: WEBHOOK_FAILURES_ONLY
@@ -75,4 +75,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: webhook_url
-                  name: velero-backup-notification-secrets
+                  name: velero-notifications-secrets
