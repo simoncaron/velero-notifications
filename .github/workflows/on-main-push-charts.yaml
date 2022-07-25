@@ -5,6 +5,7 @@ on:
       - "main"
     paths:
       - "charts/**"
+  workflow_dispatch:
 
 jobs:
   publish-helm-chart:
