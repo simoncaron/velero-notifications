@@ -3,6 +3,15 @@ entries:
   velero-notifications:
   - apiVersion: v1
     appVersion: 0.1.0
+    created: "2022-07-26T18:24:37.949378957Z"
+    description: A Helm chart to send email/Slack notifications for Velero backups/restores
+    digest: 08f8bd2304184c706086fc68e87dffa32ecf92622c823a33b9cbf8feedab0f3a
+    name: velero-notifications
+    urls:
+    - https://simoncaron.github.io/velero-notifications/velero-notifications-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v1
+    appVersion: 0.1.0
     created: "2022-07-25T20:17:01.05845077Z"
     description: A Helm chart to send email/Slack notifications for Velero backups/restores
     digest: 4bfc7db71448f8a133d496029a8f13b7b3951bf0a683e3fcac6b512e0f330320
@@ -10,4 +19,4 @@ entries:
     urls:
     - https://simoncaron.github.io/velero-notifications/velero-notifications-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-25T20:17:01.056885047Z"
+generated: "2022-07-26T18:24:37.946365945Z"
