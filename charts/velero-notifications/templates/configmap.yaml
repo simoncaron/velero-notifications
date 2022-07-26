@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "velero-notifications.fullname" . }}-config
+data:
+  VELERO_NAMESPACE: {{ .Values.configuration.veleroInstallNamespace | quote }}
+
+  NOTIFICATION_PREFIX: {{ .Values.configuration.notificationPrefix | quote }}
+
+  ENABLE_SLACK_NOTIFICATIONS: {{ .Values.configuration.slack.enabled | quote }}
+  SLACK_FAILURES_ONLY: {{ .Values.configuration.slack.onFailureOnly | quote }}
+  SLACK_USERNAME: {{ .Values.configuration.slack.username | quote }}
+
+  ENABLE_EMAIL_NOTIFICATIONS: {{ .Values.configuration.email.enabled | quote }}
+  EMAIL_FAILURES_ONLY: {{ .Values.configuration.email.onFailureOnly | quote }}
+  EMAIL_FROM_ADDRESS: {{ .Values.configuration.email.fromAddress | quote }}
+  EMAIL_TO_ADDRESS: {{ .Values.configuration.email.toAddress | quote }}
+
+  ENABLE_WEBHOOK_NOTIFICATIONS: {{ .Values.configuration.webhook.enabled | quote }}
+  WEBHOOK_FAILURES_ONLY: {{ .Values.configuration.webhook.onFailureOnly | quote }}

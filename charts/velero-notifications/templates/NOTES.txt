@@ -1,0 +1,3 @@
+Velero Notifications will check for Restore/Backups events, and send notifications when needed.
+
+See https://github.com/simoncaron/velero-notifications/ for details.

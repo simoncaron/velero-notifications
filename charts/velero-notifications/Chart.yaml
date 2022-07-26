@@ -1,5 +1,12 @@
-apiVersion: v1
+apiVersion: v2
 appVersion: "0.1.0"
-description: A Helm chart to send email/Slack notifications for Velero backups/restores
+description: A Helm chart to send notifications for Velero backups/restores
 name: velero-notifications
-version: 0.2.0
+version: 1.0.0
+home: https://github.com/simoncaron/velero-notifications
+maintainers:
+  - name: simoncaron
+    email: simon.caron.8@gmail.com
+    url: "https://github.com/simoncaron"
+sources:
+  - https://github.com/simoncaron/velero-notifications

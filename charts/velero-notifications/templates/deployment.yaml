@@ -1,104 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: velero-notifications
-  namespace: velero
+  name: {{ include "velero-notifications.fullname" . }}
+  labels:
+    {{- include "velero-notifications.labels" . | nindent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: velero-notifications
+      {{- include "velero-notifications.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app: velero-notifications
-        {{- if .Values.podLabels }}
-        {{- toYaml .Values.podLabels | nindent 8 }}
-        {{- end }}
+        {{- include "velero-notifications.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: velero
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName }}
-      {{- end }}
+      serviceAccountName: {{ include "velero-notifications.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: velero-notifications
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
+          envFrom:
+          - configMapRef:
+              name: {{ include "velero-notifications.fullname" . }}-config
+          - secretRef:
+              name: {{ include "velero-notifications.fullname" . }}-secrets
+          {{- if .Values.extraEnvVars }}
           env:
-            - name: VELERO_NAMESPACE
-              value: {{ .Values.velero_namespace | quote }}
-            - name: NOTIFICATION_PREFIX
-              value: {{ .Values.notification_prefix | quote }}
-            - name: ENABLE_SLACK_NOTIFICATIONS
-              value: {{ .Values.slack.enabled | quote }}
-            - name: SLACK_FAILURES_ONLY
-              value: {{ .Values.slack.failures_only | quote }}
-            - name: SLACK_USERNAME
-              value: {{ .Values.slack.username | quote }}
-            - name: SLACK_WEBHOOK
-              valueFrom:
-                secretKeyRef:
-                  key: slack_webhook
-                  name: velero-notifications-secrets
-            - name: SLACK_CHANNEL
-              valueFrom:
-                secretKeyRef:
-                  key: slack_channel
-                  name: velero-notifications-secrets
-            - name: ENABLE_EMAIL_NOTIFICATIONS
-              value: {{ .Values.email.enabled | quote }}
-            - name: EMAIL_FAILURES_ONLY
-              value: {{ .Values.email.failures_only | quote }}
-            - name: EMAIL_FROM_ADDRESS
-              value: {{ .Values.email.from_address | quote }}
-            - name: EMAIL_TO_ADDRESS
-              value: {{ .Values.email.to_address | quote }}
-            - name: EMAIL_SMTP_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: email_smtp_host
-                  name: velero-notifications-secrets
-            - name: EMAIL_SMTP_PORT
-              valueFrom:
-                secretKeyRef:
-                  key: email_smtp_port
-                  name: velero-notifications-secrets
-            - name: EMAIL_SMTP_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: email_smtp_username
-                  name: velero-notifications-secrets
-            - name: EMAIL_SMTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: email_smtp_password
-                  name: velero-notifications-secrets
-            - name: ENABLE_WEBHOOK_NOTIFICATIONS
-              value: {{ .Values.webhook.enabled | quote }}
-            - name: WEBHOOK_FAILURES_ONLY
-              value: {{ .Values.webhook.failures_only | quote }}
-            - name: WEBHOOK_URL
-              valueFrom:
-                secretKeyRef:
-                  key: webhook_url
-                  name: velero-notifications-secrets
-      tolerations:
-      {{- if .Values.tolerations }}
-          {{- with .Values.tolerations }}
-{{ toYaml . | indent 8 }}
+            {{ toYaml .Values.extraEnvVars | nindent 12 }}
           {{- end }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
