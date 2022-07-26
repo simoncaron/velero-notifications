@@ -2,7 +2,7 @@ apiVersion: v2
 appVersion: "0.1.0"
 description: A Helm chart to send notifications for Velero backups/restores
 name: velero-notifications
-version: 1.0.0
+version: 1.0.1
 home: https://github.com/simoncaron/velero-notifications
 maintainers:
   - name: simoncaron

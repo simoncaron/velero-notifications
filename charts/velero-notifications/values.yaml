@@ -24,8 +24,8 @@ configuration:
   # -- Namespace where Velero is deployed
   veleroInstallNamespace: velero
 
-  # -- Prefix to append to notifications sent
-  notificationPrefix: "[Velero] "
+  # -- Prefix to insert before notification message
+  notificationPrefix: ""
 
   slack:
     # -- Enable Slack notifications

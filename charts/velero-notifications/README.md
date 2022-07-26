@@ -1,6 +1,6 @@
 # velero-notifications
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
 A Helm chart to send notifications for Velero backups/restores
 
@@ -29,7 +29,7 @@ A Helm chart to send notifications for Velero backups/restores
 | configuration.email.smtp.port | int | `587` | SMTP server port for email notifications |
 | configuration.email.smtp.username | string | `""` | SMTP server username for email notifications |
 | configuration.email.toAddress | string | `""` | Receiver address for email notifications |
-| configuration.notificationPrefix | string | `"[Velero] "` | Prefix to append to notifications sent |
+| configuration.notificationPrefix | string | `""` | Prefix to insert before notification message |
 | configuration.slack.channel | string | `""` | Channel for slack notifications |
 | configuration.slack.enabled | bool | `false` | Enable Slack notifications |
 | configuration.slack.onFailureOnly | bool | `true` | Send notifications on failure or partial failures only |
