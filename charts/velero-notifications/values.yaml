@@ -1,6 +1,8 @@
 image:
   repository: ghcr.io/simoncaron/velero-notifications
   tag: ""  # will default to the appVersion in Chart.yaml
+  pullPolicy: IfNotPresent
+  pullSecrets: []
 
 slack:
   enabled: false
@@ -20,7 +22,6 @@ email:
   from_address: from@email.com
   to_address: to@email.com
 
-
 webhook:
   enabled: false
   failures_only: false
@@ -29,3 +30,15 @@ webhook:
 velero_namespace: velero
 
 notification_prefix: "[Velero] "
+
+resources: {}
+
+podLabels: {}
+
+priorityClassName: ""
+
+tolerations: []
+
+affinity: {}
+
+nodeSelector: {}

@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "0.1.0"
 description: A Helm chart to send email/Slack notifications for Velero backups/restores
 name: velero-notifications
-version: 0.1.0
+version: 0.2.0

@@ -12,12 +12,24 @@ spec:
     metadata:
       labels:
         app: velero-notifications
+        {{- if .Values.podLabels }}
+        {{- toYaml .Values.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: velero
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
       containers:
         - name: velero-notifications
           image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           env:
             - name: VELERO_NAMESPACE
               value: {{ .Values.velero_namespace | quote }}
@@ -76,3 +88,17 @@ spec:
                 secretKeyRef:
                   key: webhook_url
                   name: velero-notifications-secrets
+      tolerations:
+      {{- if .Values.tolerations }}
+          {{- with .Values.tolerations }}
+{{ toYaml . | indent 8 }}
+          {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+      {{- end }}
