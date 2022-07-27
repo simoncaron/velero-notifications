@@ -2,6 +2,25 @@ apiVersion: v1
 entries:
   velero-notifications:
   - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-07-27T02:11:02.344910565Z"
+    description: A Helm chart to deploy Velero notifications controller
+    digest: a27f584e5b1ac46576fef1b36bb5630f21ff9c80f62ec59d503acd905f809dd6
+    home: https://github.com/simoncaron/velero-notifications
+    icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
+    keywords:
+    - velero
+    maintainers:
+    - email: simon.caron.8@gmail.com
+      name: simoncaron
+      url: https://github.com/simoncaron
+    name: velero-notifications
+    sources:
+    - https://github.com/simoncaron/velero-notifications
+    urls:
+    - https://simoncaron.github.io/velero-notifications/velero-notifications-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2022-07-26T23:01:04.6796551Z"
     description: A Helm chart to send notifications for Velero backups/restores
@@ -51,4 +70,4 @@ entries:
     urls:
     - https://simoncaron.github.io/velero-notifications/velero-notifications-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-26T23:01:04.678340002Z"
+generated: "2022-07-27T02:11:02.342737266Z"
