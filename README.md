@@ -1,37 +1,30 @@
-# velero-notifications
+# Velero Notifications Controller
 
-This is a simple Kubernetes controller written in Ruby that sends email/Slack/webhook notifications when backups or restores are performed by [Velero](https://velero.io/) in a [Kubernetes](https://kubernetes.io/) cluster.
+## Overview
+
+This is a simple Kubernetes controller written in Ruby that sends Email/Slack/Webhook notifications when backups or restores are performed by [Velero](https://velero.io/) in a [Kubernetes](https://kubernetes.io/) cluster.
 
 ## Installation
 
-- Clone the repo
-- Install with Helm
-
-```bash
-helm install ./helm \
-  --name velero-backup-notification \
-  --namespace velero \
-  --set velero_namespace=velero \
-  --set notification_prefix="[Velero]"
-  --set slack.enabled=true \
-  --set slack.failures_only=true \
-  --set slack.webhook=https://... \
-  --set slack.channel=velero \
-  --set slack.username=Velero \
-  --set email.enabled=true \
-  --set email.failures_only=true \
-  --set email.smtp.host=... \
-  --set email.smtp.port=587 \
-  --set email.smtp.username=... \
-  --set email.smtp.password=... \
-  --set email.from_address=... \
-  --set email.to_address=...
-  --set webhook.enabled=true \
-  --set webhook.failures_only=false \
-  --set webhook.url=https://...
+Begin by adding and updating the grafana Helm chart repo:
 ```
+helm repo add velero-notifications https://simoncaron.github.io/velero-notifications/
+helm repo update
+```
+Next, install the chart:
+```
+helm install my-release velero-notifications/velero-notifications
+```
+Replace my-release with your desired release name.
 
-That's it! You should now receive notifications when a backup/restore is completed or fails.
+## Configuration
+
+If you want to modify the default parameters, you can create a values.yaml file and pass it in to helm install:
+
+```
+helm install my-release velero-notifications/velero-notifications -f values.yaml
+```
+A list of configurable template parameters can be found in the [Helm chart repository](https://github.com/simoncaron/velero-notifications/tree/main/charts/velero-notifications).
 
 ## License
 
