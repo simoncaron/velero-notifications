@@ -1,8 +1,8 @@
 # velero-notifications
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
-A Helm chart to send notifications for Velero backups/restores
+A Helm chart to deploy Velero notifications controller
 
 **Homepage:** <https://github.com/simoncaron/velero-notifications>
 

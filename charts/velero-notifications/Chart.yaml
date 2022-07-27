@@ -1,8 +1,8 @@
 apiVersion: v2
-appVersion: "0.1.0"
-description: A Helm chart to send notifications for Velero backups/restores
+appVersion: "1.0.0"
+description: A Helm chart to deploy Velero notifications controller
 name: velero-notifications
-version: 1.0.1
+version: 1.1.0
 home: https://github.com/simoncaron/velero-notifications
 maintainers:
   - name: simoncaron
@@ -10,3 +10,6 @@ maintainers:
     url: "https://github.com/simoncaron"
 sources:
   - https://github.com/simoncaron/velero-notifications
+icon: https://cdn-images-1.medium.com/max/1600/1*-9mb3AKnKdcL_QD3CMnthQ.png
+keywords:
+  - velero
